@@ -13,11 +13,11 @@ BEGIN
     DECLARE v_current_stock INT DEFAULT 0;
     DECLARE v_unit_price DECIMAL(18,2) DEFAULT 0;
 
-    START TRANSACTION;
-
     SELECT stock_quantity, unit_price INTO v_current_stock, v_unit_price
     FROM Medicines
     WHERE medicine_id = p_medicine_id;
+    
+	START TRANSACTION;
 
     IF p_quantity > v_current_stock THEN
         ROLLBACK;
